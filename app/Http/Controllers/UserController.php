@@ -81,4 +81,26 @@ public function all()
         ]
     );
 }
+public function register(Request $request)
+{
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required'
+         ]);
+        $user=new User();
+        $user->name= $request['name'];
+        $user->email= $request['email'];
+        $user->password= Hash::make($request['password']);
+        $user->save();
+        return response()->json(
+            [
+                'status' => true,
+                'message' => 'User register success',
+                'data' => $user
+            ]
+        );
+        
 }
+}
+

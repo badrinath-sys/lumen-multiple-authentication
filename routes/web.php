@@ -15,8 +15,12 @@
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+    
 });
 
+$router->group(['prefix' => 'user'], function ($router) {
+    $router->post('register', 'UserController@register');
+});
 
 
 $router->group(['prefix' => 'auth'], function ($router) {
@@ -24,6 +28,7 @@ $router->group(['prefix' => 'auth'], function ($router) {
 });
 $router->group(['prefix' => 'user', 'middleware' => 'auth'], function ($router) {
     $router->get('profile', 'UserController@profile');
+
 });
 
 $router->group(['prefix' => 'admin'], function ($router) {
