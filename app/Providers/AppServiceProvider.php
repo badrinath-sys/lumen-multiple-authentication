@@ -15,17 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['auth']->viaRequest('passport', function ($request) 
-{
-    if ($request->header('Authorization')) {
-        $key = explode(' ', $request->header('Authorization'))[1];
-
-        if ($request->is('admin/*')) {
-            return Admin::where('api_token', $key)->first();
-        } else {
-            return User::where('api_token', $key)->first();
-        }
-    }
-});
+        
     }
 }
