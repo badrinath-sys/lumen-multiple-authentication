@@ -58,4 +58,25 @@ class AdminController extends Controller
         ]
     );
 }
+public function register(Request $request)
+{
+    $this->validate($request, [
+        'name' => 'required',
+        'email' => 'required',
+        'password' => 'required'
+         ]);
+        $admin=new Admin();
+        $admin->name= $request['name'];
+        $admin->email= $request['email'];
+        $admin->password= Hash::make($request['password']);
+        $admin->save();
+        return response()->json(
+            [
+                'status' => true,
+                'message' => 'admin register success',
+                'data' => $admin
+            ]
+        );
+        
+}
 }

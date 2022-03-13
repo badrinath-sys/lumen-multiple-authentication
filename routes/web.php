@@ -22,8 +22,11 @@ $router->group(['prefix' => 'user'], function ($router) {
     $router->post('register', 'UserController@register');
 });
 
+$router->group(['prefix' => 'admin'], function ($router) {
+    $router->post('register', 'AdminController@register');
+});
 
-$router->group(['prefix' => 'auth'], function ($router) {
+$router->group(['prefix' => 'user'], function ($router) {
     $router->post('login', 'UserController@login');
 });
 $router->group(['prefix' => 'user', 'middleware' => 'auth'], function ($router) {
